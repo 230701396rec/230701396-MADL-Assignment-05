@@ -1,0 +1,42 @@
+package com.example.assignment5
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val etTemp = findViewById<EditText>(R.id.etTemp)
+        val tvResult = findViewById<TextView>(R.id.tvResult)
+        val btnCtoF = findViewById<Button>(R.id.btnCtoF)
+        val btnFtoC = findViewById<Button>(R.id.btnFtoC)
+
+        btnCtoF.setOnClickListener {
+            if (etTemp.text.isEmpty()) {
+                Toast.makeText(this, "Enter temperature", Toast.LENGTH_SHORT).show()
+            } else {
+                val celsius = etTemp.text.toString().toDouble()
+                val fahrenheit = (celsius * 9 / 5) + 32
+                tvResult.text = "Fahrenheit: %.2f °F".format(fahrenheit)
+            }
+        }
+
+
+        btnFtoC.setOnClickListener {
+            if (etTemp.text.isEmpty()) {
+                Toast.makeText(this, "Enter temperature", Toast.LENGTH_SHORT).show()
+            } else {
+                val fahrenheit = etTemp.text.toString().toDouble()
+                val celsius = (fahrenheit - 32) * 5 / 9
+                tvResult.text = "Celsius: %.2f °C".format(celsius)
+            }
+        }
+    }
+}
